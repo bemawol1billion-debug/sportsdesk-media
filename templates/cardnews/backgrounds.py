@@ -131,7 +131,31 @@ def badminton():
     return _wrap(defs, body)
 
 
-BACKGROUNDS = {"basketball": basketball, "baseball": baseball, "badminton": badminton}
+def ski():
+    defs = """
+    <linearGradient id='sky' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#050B18'/><stop offset='0.55' stop-color='#0C1E36'/><stop offset='1' stop-color='#1B3554'/></linearGradient>
+    <linearGradient id='snowA' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#E9F4FF'/><stop offset='1' stop-color='#9DB9D6'/></linearGradient>
+    <linearGradient id='snowB' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#C9DDF0'/><stop offset='1' stop-color='#6F8FB0'/></linearGradient>
+    <radialGradient id='moon' cx='0.5' cy='0.5' r='0.5'><stop offset='0' stop-color='#7FD4FF' stop-opacity='0.45'/><stop offset='1' stop-color='#7FD4FF' stop-opacity='0'/></radialGradient>
+    """
+    flakes = "".join(f"<circle cx='{(i * 137) % 1080}' cy='{(i * 89) % 1000}' r='{2 + (i % 4)}' fill='#FFFFFF' opacity='{0.25 + (i % 5) * 0.12:.2f}'/>" for i in range(70))
+    lights = "".join(f"<circle cx='{760 + i * 34}' cy='{860 + i * 46}' r='7' fill='#FFE7A3'/><circle cx='{760 + i * 34}' cy='{860 + i * 46}' r='22' fill='#FFE7A3' opacity='0.18'/>" for i in range(9))
+    towers = "".join(f"<line x1='{300 + i * 120}' y1='{760 + i * 70}' x2='{300 + i * 120}' y2='{860 + i * 70}' stroke='#2A3F5A' stroke-width='8'/>" for i in range(6))
+    body = f"""
+    <rect width='1080' height='1440' fill='url(#sky)'/>
+    <circle cx='820' cy='300' r='360' fill='url(#moon)'/>
+    <circle cx='820' cy='300' r='70' fill='#EAF6FF' opacity='0.85'/>
+    <polygon points='-100,1000 260,560 520,860 760,520 1180,980 1180,1440 -100,1440' fill='url(#snowB)' opacity='0.55'/>
+    <polygon points='-100,1180 340,700 620,1000 900,760 1180,1100 1180,1440 -100,1440' fill='url(#snowA)'/>
+    <path d='M340,700 Q420,900 300,1440' stroke='#B7CDE3' stroke-width='60' fill='none' opacity='0.6'/>
+    <path d='M900,760 Q820,1000 960,1440' stroke='#B7CDE3' stroke-width='50' fill='none' opacity='0.6'/>
+    <line x1='300' y1='760' x2='960' y2='1210' stroke='#2A3F5A' stroke-width='4'/>
+    {towers}{lights}{flakes}
+    """
+    return _wrap(defs, body)
+
+
+BACKGROUNDS = {"basketball": basketball, "baseball": baseball, "badminton": badminton, "ski": ski}
 
 
 def get(sport_key):

@@ -1,7 +1,7 @@
 """스포츠데스크 카드뉴스 렌더러 v3 (종목 배경 일러스트 + 키워드 표지) — 이슈 1개 = 게시물 1개(3~5장).
 
 사용법: python3 render_v2.py <post.json> <output_dir>
-슬라이드 타입: cover, text, stats, compare, why, vote, closing
+슬라이드 타입: cover, text, stats, compare, why, vote, dday, closing
 종목별 포인트 컬러: baseball / basketball / badminton / football / volleyball / golf / default
 """
 import html
@@ -20,7 +20,7 @@ WHITE, MUTED, BODY = "#F5F2EB", "#8FA3B8", "#C9D4E0"
 FONT = "'Noto Sans CJK KR', 'Noto Sans KR', sans-serif"
 ACCENTS = {
     "baseball": "#FF5A36", "basketball": "#FFB020", "badminton": "#2BD9A0",
-    "football": "#4DA3FF", "volleyball": "#C77DFF", "golf": "#9BE15D", "default": "#FF5A36",
+    "football": "#4DA3FF", "ski": "#7FD4FF", "volleyball": "#C77DFF", "golf": "#9BE15D", "default": "#FF5A36",
 }
 
 
@@ -103,6 +103,16 @@ body {{ width:{W}px; height:{H}px; background:{NAVY}; color:{WHITE}; font-family
 .vcta {{ margin-top:48px; font-size:38px; font-weight:900; text-align:center; }}
 .vcta em {{ font-style:normal; color:{acc}; }}
 .vchip {{ display:inline-block; margin-left:22px; background:{acc}; color:{NAVY}; padding:8px 18px; font-size:26px; font-weight:900; letter-spacing:2px; vertical-align:middle; }}
+
+.dd {{ margin-top:36px; display:flex; flex-direction:column; gap:12px; }}
+.ddr {{ display:flex; align-items:center; justify-content:space-between; background:{PANEL}; padding:18px 30px; border-left:8px solid {acc}; }}
+.ddr.dim {{ border-left-color:{LINE}; }}
+.ddr .n {{ font-size:38px; font-weight:900; }}
+.ddr .n span {{ font-size:24px; color:{MUTED}; font-weight:700; margin-left:12px; }}
+.ddr .s {{ font-size:26px; color:{BODY}; margin-top:6px; font-weight:700; }}
+.ddr .v {{ font-size:64px; font-weight:900; color:{acc}; letter-spacing:-2px; white-space:nowrap; }}
+.ddr.dim .v {{ font-size:30px; color:{MUTED}; letter-spacing:0; }}
+.ddnote {{ margin-top:22px; font-size:24px; color:{MUTED}; line-height:1.5; }}
 .vsub {{ margin-top:14px; font-size:28px; color:{MUTED}; text-align:center; font-weight:700; }}
 """
 
@@ -170,6 +180,15 @@ def slide(d, s, i, n):
                  f"<div class='vcta'>{cta}</div>"
                  f"<div class='vsub'>{esc(s.get('sub', '투표 결과는 다음 카드뉴스에서 공개합니다'))}</div>")
         return f"{under}<div class='bar'></div><div class='frame'>{top(d)}<div class='mid'>{inner}</div>{foot(src or '스포츠데스크 · 매일 스포츠를 맥락까지', i, n)}</div>"
+    elif t == "dday":
+        rows = ""
+        for r in s["rows"]:
+            dim = " dim" if r.get("dim") else ""
+            rows += (f"<div class='ddr{dim}'><div><div class='n'>{esc(r['name'])}<span>{esc(r.get('region', ''))}</span></div>"
+                     f"<div class='s'>{esc(r['status'])}</div></div><div class='v'>{esc(r['d'])}</div></div>")
+        note = f"<div class='ddnote'>{esc(s['note'])}</div>" if s.get("note") else ""
+        inner = (f"<div class='label'>{esc(s['label'])}</div><div class='heading'>{esc(s['heading'])}</div>"
+                 f"<div class='dd'>{rows}</div>{note}")
     elif t == "closing":
         pts = "".join(f"<div>{esc(p)}</div>" for p in s.get("points", []))
         inner = (f"<div class='sum'>{esc(s['summary'])}</div><div class='pts'>{pts}</div>"
