@@ -1,7 +1,7 @@
 """스포츠데스크 카드뉴스 렌더러 v3 (종목 배경 일러스트 + 키워드 표지) — 이슈 1개 = 게시물 1개(3~5장).
 
 사용법: python3 render_v2.py <post.json> <output_dir>
-슬라이드 타입: cover, text, stats, compare, why, closing
+슬라이드 타입: cover, text, stats, compare, why, vote, closing
 종목별 포인트 컬러: baseball / basketball / badminton / football / volleyball / golf / default
 """
 import html
@@ -91,6 +91,18 @@ body {{ width:{W}px; height:{H}px; background:{NAVY}; color:{WHITE}; font-family
 .badge {{ display:inline-flex; align-items:center; gap:26px; background:{acc}; color:{NAVY}; padding:22px 34px 22px 30px; align-self:flex-start; }}
 .badge .v {{ font-size:86px; font-weight:900; line-height:1; letter-spacing:-3px; }}
 .badge .l {{ font-size:28px; font-weight:900; line-height:1.3; }}
+.vq {{ margin-top:22px; font-size:78px; font-weight:900; line-height:1.2; letter-spacing:-2px; }}
+.vopts {{ margin-top:56px; display:grid; grid-template-columns:1fr 1fr; gap:24px; }}
+.vopt {{ background:{PANEL}; border:4px solid {LINE}; padding:40px 30px 44px; text-align:center; }}
+.vopt.a {{ border-color:{acc}; }}
+.vopt.b {{ border-color:{WHITE}; }}
+.vopt .k {{ display:inline-block; width:96px; height:96px; line-height:96px; font-size:58px; font-weight:900; background:{acc}; color:{NAVY}; border-radius:50%; }}
+.vopt.b .k {{ background:{WHITE}; }}
+.vopt .t {{ margin-top:28px; font-size:44px; font-weight:900; line-height:1.3; }}
+.vopt .d {{ margin-top:14px; font-size:28px; color:{BODY}; line-height:1.45; }}
+.vcta {{ margin-top:48px; font-size:38px; font-weight:900; text-align:center; }}
+.vcta em {{ font-style:normal; color:{acc}; }}
+.vsub {{ margin-top:14px; font-size:28px; color:{MUTED}; text-align:center; font-weight:700; }}
 """
 
 
@@ -145,6 +157,16 @@ def slide(d, s, i, n):
         big = esc(s["statement"]).replace("[", "<em>").replace("]", "</em>")
         inner = (f"<div class='label'>{esc(s['label'])}</div><div class='big'>{big}</div>"
                  f"<div class='box'>{esc(s['body'])}</div>")
+    elif t == "vote":
+        a, b = s["options"]
+        def opt(o, cls):
+            d = f"<div class='d'>{esc(o['desc'])}</div>" if o.get("desc") else ""
+            return f"<div class='vopt {cls}'><div class='k'>{esc(o['key'])}</div><div class='t'>{esc(o['text'])}</div>{d}</div>"
+        inner = (f"<div class='label'>{esc(s.get('label', '당신의 선택은?'))}</div><div class='vq'>{esc(s['question'])}</div>"
+                 f"<div class='vopts'>{opt(a, 'a')}{opt(b, 'b')}</div>"
+                 f"<div class='vcta'>댓글에 <em>{esc(a['key'])}</em> 또는 <em>{esc(b['key'])}</em> 남겨주세요</div>"
+                 f"<div class='vsub'>{esc(s.get('sub', '투표 결과는 다음 카드뉴스에서 공개합니다'))}</div>")
+        return f"{under}<div class='bar'></div><div class='frame'>{top(d)}<div class='mid'>{inner}</div>{foot(src or '스포츠데스크 · 매일 스포츠를 맥락까지', i, n)}</div>"
     elif t == "closing":
         pts = "".join(f"<div>{esc(p)}</div>" for p in s.get("points", []))
         inner = (f"<div class='sum'>{esc(s['summary'])}</div><div class='pts'>{pts}</div>"
