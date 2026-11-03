@@ -178,7 +178,7 @@ def slide(d, s, i, n):
         inner = (f"<div class='label'>{esc(s.get('label', '당신의 선택은?'))}</div><div class='vq'>{esc(s['question'])}</div>"
                  f"<div class='vopts'>{opt(a, 'a')}{opt(b, 'b')}</div>"
                  f"<div class='vcta'>{cta}</div>"
-                 f"<div class='vsub'>{esc(s.get('sub', '투표 결과는 다음 카드뉴스에서 공개합니다'))}</div>")
+                 f"<div class='vsub'>{esc(s.get('sub', '그렇게 생각한 이유는 댓글로 남겨주세요'))}</div>")
         return f"{under}<div class='bar'></div><div class='frame'>{top(d)}<div class='mid'>{inner}</div>{foot(src or '스포츠데스크 · 매일 스포츠를 맥락까지', i, n)}</div>"
     elif t == "dday":
         rows = ""
