@@ -102,6 +102,7 @@ body {{ width:{W}px; height:{H}px; background:{NAVY}; color:{WHITE}; font-family
 .vopt .d {{ margin-top:14px; font-size:28px; color:{BODY}; line-height:1.45; }}
 .vcta {{ margin-top:48px; font-size:38px; font-weight:900; text-align:center; }}
 .vcta em {{ font-style:normal; color:{acc}; }}
+.vchip {{ display:inline-block; margin-left:22px; background:{acc}; color:{NAVY}; padding:8px 18px; font-size:26px; font-weight:900; letter-spacing:2px; vertical-align:middle; }}
 .vsub {{ margin-top:14px; font-size:28px; color:{MUTED}; text-align:center; font-weight:700; }}
 """
 
@@ -126,7 +127,8 @@ def slide(d, s, i, n):
     if t == "cover":
         kw = s["keyword"]
         size = s.get("kw_size") or (250 if len(kw) <= 3 else 190 if len(kw) <= 5 else 150)
-        inner = (f"<div><div>{kicker(d)}</div>"
+        chip = f"<div style='margin-top:18px'><span class='vchip' style='margin-left:0'>{esc(s['vote_chip'])}</span></div>" if s.get("vote_chip") else ""
+        inner = (f"<div><div>{kicker(d)}{chip}</div>"
                  f"<div class='kw' style='font-size:{size}px'>{esc(kw)}</div>"
                  f"<div class='hook'>{esc(s['hook'])}</div>"
                  f"<div class='csub'>{esc(s['sub'])}</div></div>"
