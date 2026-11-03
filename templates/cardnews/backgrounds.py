@@ -155,7 +155,38 @@ def ski():
     return _wrap(defs, body)
 
 
-BACKGROUNDS = {"basketball": basketball, "baseball": baseball, "badminton": badminton, "ski": ski}
+def golf():
+    defs = """
+    <linearGradient id='gsky' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#050B18'/><stop offset='0.6' stop-color='#0B1E2E'/><stop offset='1' stop-color='#123A2E'/></linearGradient>
+    <linearGradient id='fairA' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#3E8F3A'/><stop offset='1' stop-color='#14401C'/></linearGradient>
+    <linearGradient id='fairB' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#2A6B2E'/><stop offset='1' stop-color='#0E2E16'/></linearGradient>
+    <radialGradient id='green' cx='0.5' cy='0.45' r='0.6'><stop offset='0' stop-color='#9BE15D'/><stop offset='1' stop-color='#3C8A2E'/></radialGradient>
+    <radialGradient id='gglow' cx='0.5' cy='0.5' r='0.5'><stop offset='0' stop-color='#9BE15D' stop-opacity='0.35'/><stop offset='1' stop-color='#9BE15D' stop-opacity='0'/></radialGradient>
+    <clipPath id='gbc'><circle cx='900' cy='1200' r='120'/></clipPath>
+    <radialGradient id='gball' cx='0.35' cy='0.3' r='0.75'><stop offset='0' stop-color='#FFFFFF'/><stop offset='0.6' stop-color='#E3E8EE'/><stop offset='1' stop-color='#8C98A6'/></radialGradient>
+    """
+    stars = "".join(f"<circle cx='{(i * 151) % 1080}' cy='{(i * 67) % 620}' r='{1 + (i % 3)}' fill='#FFFFFF' opacity='{0.15 + (i % 4) * 0.12:.2f}'/>" for i in range(50))
+    dimples = "".join(f"<circle cx='{800 + (i % 7) * 32 + (16 if (i // 7) % 2 else 0)}' cy='{1100 + (i // 7) * 30}' r='7' fill='#B9C3CE' opacity='0.55'/>" for i in range(49))
+    body = f"""
+    <rect width='1080' height='1440' fill='url(#gsky)'/>
+    {stars}
+    <circle cx='760' cy='640' r='380' fill='url(#gglow)'/>
+    <path d='M-100,900 C200,780 520,820 760,760 C920,720 1060,740 1180,780 L1180,1440 L-100,1440 Z' fill='url(#fairB)' opacity='0.8'/>
+    <path d='M-100,1080 C240,960 600,1000 860,920 C980,884 1100,900 1180,930 L1180,1440 L-100,1440 Z' fill='url(#fairA)'/>
+    <ellipse cx='780' cy='835' rx='230' ry='58' fill='url(#green)' opacity='0.9'/>
+    <ellipse cx='820' cy='840' rx='22' ry='7' fill='#06120A'/>
+    <line x1='820' y1='840' x2='820' y2='520' stroke='#E9EEF3' stroke-width='7'/>
+    <path d='M820,522 L960,566 L820,610 Z' fill='#9BE15D'/>
+    <ellipse cx='520' cy='965' rx='110' ry='26' fill='#D9C79A' opacity='0.55'/>
+    <path d='M880,1080 Q700,760 820,700' stroke='#9BE15D' stroke-width='3' stroke-dasharray='14 16' fill='none' opacity='0.5'/>
+    <rect x='889' y='1300' width='22' height='70' rx='6' fill='#E9EEF3' opacity='0.85'/>
+    <circle cx='900' cy='1200' r='120' fill='url(#gball)'/>
+    <g clip-path='url(#gbc)'>{dimples}</g>
+    """
+    return _wrap(defs, body)
+
+
+BACKGROUNDS = {"basketball": basketball, "baseball": baseball, "badminton": badminton, "ski": ski, "golf": golf}
 
 
 def get(sport_key):
