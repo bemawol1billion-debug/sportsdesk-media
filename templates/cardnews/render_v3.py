@@ -20,7 +20,7 @@ WHITE, MUTED, BODY = "#F5F2EB", "#8FA3B8", "#C9D4E0"
 FONT = "'Noto Sans CJK KR', 'Noto Sans KR', sans-serif"
 ACCENTS = {
     "baseball": "#FF5A36", "basketball": "#FFB020", "badminton": "#2BD9A0",
-    "football": "#4DA3FF", "ski": "#7FD4FF", "volleyball": "#C77DFF", "golf": "#9BE15D", "default": "#FF5A36",
+    "football": "#4DA3FF", "ski": "#7FD4FF", "volleyball": "#C77DFF", "golf": "#9BE15D", "shorttrack": "#FF6FA8", "default": "#FF5A36",
 }
 
 
@@ -151,7 +151,9 @@ def slide(d, s, i, n):
         inner = (f"<div class='label'>{esc(s['label'])}</div><div class='heading'>{esc(s['heading'])}</div>"
                  f"<div class='bul'>{bul}</div>")
     elif t == "stats":
-        cells = "".join(f"<div class='cell'><div class='v'>{esc(c['v'])}</div><div class='l'>{esc(c['l'])}</div></div>"
+        cells = "".join(f"<div class='cell'><div class='v'"
+                        + (f" style='font-size:{c['size']}px'" if c.get('size') else "")
+                        + f">{esc(c['v'])}</div><div class='l'>{esc(c['l'])}</div></div>"
                         for c in s["stats"])
         inner = (f"<div class='label'>{esc(s['label'])}</div><div class='heading'>{esc(s['heading'])}</div>"
                  f"<div class='grid'>{cells}</div>")

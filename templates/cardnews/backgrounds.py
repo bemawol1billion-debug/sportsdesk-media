@@ -186,7 +186,76 @@ def golf():
     return _wrap(defs, body)
 
 
-BACKGROUNDS = {"basketball": basketball, "baseball": baseball, "badminton": badminton, "ski": ski, "golf": golf}
+def football():
+    defs = """
+    <linearGradient id='fsky' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#040912'/><stop offset='0.5' stop-color='#0A1830'/><stop offset='1' stop-color='#0B2A1E'/></linearGradient>
+    <radialGradient id='flamp' cx='0.5' cy='0.5' r='0.5'><stop offset='0' stop-color='#FFFFFF' stop-opacity='0.9'/><stop offset='1' stop-color='#FFFFFF' stop-opacity='0'/></radialGradient>
+    <linearGradient id='pitch' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#1C6B3E'/><stop offset='1' stop-color='#0A3320'/></linearGradient>
+    <radialGradient id='fglow' cx='0.5' cy='0.5' r='0.5'><stop offset='0' stop-color='#4DA3FF' stop-opacity='0.35'/><stop offset='1' stop-color='#4DA3FF' stop-opacity='0'/></radialGradient>
+    <radialGradient id='fball' cx='0.36' cy='0.3' r='0.78'><stop offset='0' stop-color='#FFFFFF'/><stop offset='0.62' stop-color='#E2E6EC'/><stop offset='1' stop-color='#86909C'/></radialGradient>
+    <clipPath id='fbc'><circle cx='820' cy='1170' r='230'/></clipPath>
+    """
+    lamps = ""
+    for cx0, cy0 in ((140, 110), (940, 80)):
+        lamps += f"<circle cx='{cx0 + 50}' cy='{cy0 + 30}' r='190' fill='url(#flamp)' opacity='0.30'/>"
+        lamps += "".join(f"<rect x='{cx0 + (k % 4) * 26}' y='{cy0 + (k // 4) * 22}' width='18' height='14' fill='#EAF2FF' opacity='0.9'/>" for k in range(12))
+    stripes = "".join(f"<polygon points='{-400 + i * 190},1440 {-40 + i * 120},700 {20 + i * 120},700 {-210 + i * 190},1440' fill='#FFFFFF' opacity='0.035'/>" for i in range(0, 14, 2))
+    crowd = "".join(f"<circle cx='{(i * 23) % 1080}' cy='{560 + (i * 37) % 120}' r='4' fill='#8FB4E0' opacity='{0.10 + (i % 5) * 0.06:.2f}'/>" for i in range(160))
+    patches = "".join(f"<polygon points='{x},{y - 46} {x + 44},{y - 14} {x + 28},{y + 38} {x - 28},{y + 38} {x - 44},{y - 14}' fill='#1A2230'/>"
+                      for x, y in ((820, 1170), (640, 1040), (1000, 1040), (640, 1330), (1000, 1330), (820, 960), (820, 1400)))
+    body = f"""
+    <rect width='1080' height='1440' fill='url(#fsky)'/>
+    {lamps}
+    <rect x='0' y='540' width='1080' height='170' fill='#0E1E36' opacity='0.85'/>{crowd}
+    <polygon points='-300,1440 120,700 960,700 1380,1440' fill='url(#pitch)'/>{stripes}
+    <g fill='none' stroke='#E9F2FA' stroke-opacity='0.55' stroke-width='5'>
+      <polygon points='-300,1440 120,700 960,700 1380,1440'/>
+      <line x1='-60' y1='1020' x2='1140' y2='1020'/>
+      <ellipse cx='540' cy='1020' rx='230' ry='70'/>
+      <polygon points='330,700 750,700 790,790 290,790'/>
+    </g>
+    <rect x='420' y='630' width='240' height='72' fill='none' stroke='#F2F6FA' stroke-opacity='0.8' stroke-width='6'/>
+    <circle cx='540' cy='860' r='420' fill='url(#fglow)'/>
+    <circle cx='820' cy='1170' r='250' fill='#4DA3FF' opacity='0.16' filter='url(#glow)'/>
+    <circle cx='820' cy='1170' r='230' fill='url(#fball)'/>
+    <g clip-path='url(#fbc)'>{patches}</g>
+    """
+    return _wrap(defs, body)
+
+
+def shorttrack():
+    defs = """
+    <linearGradient id='ssky' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#040914'/><stop offset='0.55' stop-color='#0B1A30'/><stop offset='1' stop-color='#1A2E48'/></linearGradient>
+    <linearGradient id='ice' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#CFE3F5'/><stop offset='1' stop-color='#7E9CBC'/></linearGradient>
+    <radialGradient id='sglow' cx='0.5' cy='0.5' r='0.5'><stop offset='0' stop-color='#FF6FA8' stop-opacity='0.32'/><stop offset='1' stop-color='#FF6FA8' stop-opacity='0'/></radialGradient>
+    <radialGradient id='slamp' cx='0.5' cy='0.5' r='0.5'><stop offset='0' stop-color='#FFFFFF' stop-opacity='0.8'/><stop offset='1' stop-color='#FFFFFF' stop-opacity='0'/></radialGradient>
+    <linearGradient id='blade' x1='0' y1='0' x2='1' y2='0'><stop offset='0' stop-color='#9AA8B8'/><stop offset='0.5' stop-color='#F4F8FC'/><stop offset='1' stop-color='#8A98A8'/></linearGradient>
+    """
+    lamps = "".join(f"<circle cx='{120 + i * 210}' cy='90' r='120' fill='url(#slamp)' opacity='0.25'/><rect x='{100 + i * 210}' y='80' width='40' height='16' rx='4' fill='#EAF2FF'/>" for i in range(5))
+    pads = "".join(f"<rect x='{-40 + i * 120}' y='690' width='112' height='46' rx='8' fill='{'#FF6FA8' if i % 2 else '#2B5BD7'}' opacity='0.75'/>" for i in range(11))
+    blocks = "".join(f"<ellipse cx='{x}' cy='{y}' rx='16' ry='8' fill='#1C2433'/>" for x, y in ((300, 960), (380, 900), (480, 870), (600, 870), (700, 900), (780, 960)))
+    trails = "".join(f"<path d='M{-80 + i * 30},{1260 + i * 26} C300,{1120 + i * 20} 780,{1120 + i * 20} 1160,{1250 + i * 26}' stroke='#FFFFFF' stroke-opacity='{0.10 + i * 0.04:.2f}' stroke-width='3' fill='none'/>" for i in range(6))
+    body = f"""
+    <rect width='1080' height='1440' fill='url(#ssky)'/>
+    {lamps}
+    <g transform='translate(0,170)'>
+    <rect x='0' y='600' width='1080' height='90' fill='#0E1E36' opacity='0.9'/>
+    {pads}
+    <rect x='0' y='736' width='1080' height='560' fill='url(#ice)'/>
+    <ellipse cx='540' cy='1000' rx='470' ry='170' fill='none' stroke='#2B5BD7' stroke-opacity='0.45' stroke-width='6'/>
+    <ellipse cx='540' cy='1000' rx='560' ry='230' fill='none' stroke='#FF6FA8' stroke-opacity='0.35' stroke-width='4' stroke-dasharray='20 18'/>
+    {blocks}</g>{trails}
+    <circle cx='800' cy='1180' r='330' fill='url(#sglow)'/>
+    <path d='M560,1270 L1060,1230 Q1100,1228 1096,1262 L1090,1274 Q1080,1290 1040,1292 L560,1300 Z' fill='url(#blade)'/>
+    <rect x='640' y='1180' width='34' height='90' fill='#2A3446'/><rect x='960' y='1170' width='34' height='70' fill='#2A3446'/>
+    <path d='M600,1070 Q600,1180 650,1190 L1010,1170 Q1060,1166 1050,1120 L1000,1050 Q900,990 760,1010 Q640,1030 600,1070 Z' fill='#141C2A'/>
+    <path d='M620,1090 Q760,1060 1000,1080' stroke='#FF6FA8' stroke-width='10' fill='none'/>
+    """
+    return _wrap(defs, body)
+
+
+BACKGROUNDS = {"basketball": basketball, "baseball": baseball, "badminton": badminton, "ski": ski, "golf": golf,
+               "football": football, "shorttrack": shorttrack}
 
 
 def get(sport_key):
