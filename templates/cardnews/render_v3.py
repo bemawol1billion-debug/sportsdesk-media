@@ -1,11 +1,15 @@
-"""스포츠데스크 카드뉴스 렌더러 v3 (종목 배경 일러스트 + 키워드 표지) — 이슈 1개 = 게시물 1개(3~5장).
+"""스포츠데스크 카드뉴스 렌더러 v3 (종목 배경 일러스트 + 키워드 표지 + 공식 배포 사진 레이어) — 이슈 1개 = 게시물 1개(3~5장).
+
+사진: 원고 최상위 "photo": {"src", "mode": full|cutout, "credit", "focus", "height", "right", "inner"} (슬라이드별 "photo"로 덮어쓰기, false면 끔)
 
 사용법: python3 render_v2.py <post.json> <output_dir>
 슬라이드 타입: cover, text, stats, compare, why, vote, dday, closing
 종목별 포인트 컬러: baseball / basketball / badminton / football / volleyball / golf / default
 """
+import base64
 import html
 import json
+import mimetypes
 import sys
 from pathlib import Path
 
@@ -22,6 +26,35 @@ ACCENTS = {
     "baseball": "#FF5A36", "basketball": "#FFB020", "badminton": "#2BD9A0",
     "football": "#4DA3FF", "ski": "#7FD4FF", "volleyball": "#C77DFF", "golf": "#9BE15D", "shorttrack": "#FF6FA8", "default": "#FF5A36",
 }
+
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+def photo_uri(src):
+    p = Path(src)
+    if not p.is_absolute():
+        p = ROOT / p
+    mime = mimetypes.guess_type(p.name)[0] or "image/png"
+    return f"data:{mime};base64," + base64.b64encode(p.read_bytes()).decode()
+
+
+def photo_layers(ph, cover):
+    """공식 배포 사진 레이어. mode=full: 전면 배경 / mode=cutout: 배경 제거 PNG를 오른쪽 아래에 세움."""
+    uri = photo_uri(ph["src"])
+    mode = ph.get("mode", "full")
+    if mode == "cutout":
+        h = ph.get("height", 1000)
+        if cover:
+            return (f"<img class='ph-cut' src='{uri}' style='height:{h}px;right:{ph.get('right', -30)}px'>"
+                    "<div class='ph-cut-shade'></div>")
+        return f"<img class='ph-cut ph-dim' src='{uri}' style='height:{h}px;right:{ph.get('right', -30)}px'>"
+    pos = ph.get("focus", "center top")
+    return f"<img class='ph-full' src='{uri}' style='object-position:{pos}'><div class='ph-tint'></div>"
+
+
+def credit(ph):
+    return f"<div class='ph-credit'>{esc(ph['credit'])}</div>" if ph and ph.get("credit") else ""
 
 
 def esc(s):
@@ -113,6 +146,13 @@ body {{ width:{W}px; height:{H}px; background:{NAVY}; color:{WHITE}; font-family
 .ddr .v {{ font-size:64px; font-weight:900; color:{acc}; letter-spacing:-2px; white-space:nowrap; }}
 .ddr.dim .v {{ font-size:30px; color:{MUTED}; letter-spacing:0; }}
 .ddnote {{ margin-top:22px; font-size:24px; color:{MUTED}; line-height:1.5; }}
+.ph-full {{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }}
+.ph-tint {{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(11,22,38,0.35) 0%, rgba(11,22,38,0.10) 40%, rgba(11,22,38,0.55) 100%); mix-blend-mode:multiply; }}
+.ph-cut {{ position:absolute; bottom:0; width:auto; filter:drop-shadow(0 0 60px {acc}55) drop-shadow(0 20px 40px rgba(0,0,0,0.6)); }}
+.ph-cut.ph-dim {{ opacity:0.16; filter:grayscale(0.4); }}
+.ph-cut-shade {{ position:absolute; inset:0; background:linear-gradient(90deg, rgba(5,8,15,0.80) 0%, rgba(5,8,15,0.35) 45%, rgba(5,8,15,0) 70%); }}
+.shade-photo {{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(5,8,15,0.92) 0%, rgba(5,8,15,0.70) 28%, rgba(5,8,15,0.15) 52%, rgba(5,8,15,0.45) 80%, rgba(5,8,15,0.92) 100%); }}
+.ph-credit {{ position:absolute; z-index:3; right:84px; bottom:142px; font-size:20px; color:rgba(245,242,235,0.75); font-weight:700; text-shadow:0 2px 8px rgba(0,0,0,0.8); }}
 .vsub {{ margin-top:14px; font-size:28px; color:{MUTED}; text-align:center; font-weight:700; }}
 """
 
@@ -134,6 +174,9 @@ def slide(d, s, i, n):
     t = s["type"]
     src = "출처 · " + s["source"] if s.get("source") else ""
     bg = backgrounds.get(d.get("sport_key", ""))
+    ph = s.get("photo", d.get("photo") if (t == "cover" or d.get("photo", {}).get("inner", False)) else None)
+    if s.get("photo") is False:
+        ph = None
     if t == "cover":
         kw = s["keyword"]
         size = s.get("kw_size") or (250 if len(kw) <= 3 else 190 if len(kw) <= 5 else 150)
@@ -143,9 +186,20 @@ def slide(d, s, i, n):
                  f"<div class='hook'>{esc(s['hook'])}</div>"
                  f"<div class='csub'>{esc(s['sub'])}</div></div>"
                  f"<div class='badge'><div class='v'>{esc(s['badge_v'])}</div><div class='l'>{esc(s['badge_l'])}</div></div>")
-        return (f"<div class='bgimg'>{bg}</div><div class='shade-cover'></div><div class='bar'></div>"
+        if ph and ph.get("mode", "full") == "full":
+            back = f"<div class='bgimg'>{photo_layers(ph, True)}</div><div class='shade-photo'></div>"
+        elif ph:
+            back = f"<div class='bgimg'>{bg}</div><div class='shade-cover'></div>{photo_layers(ph, True)}"
+        else:
+            back = f"<div class='bgimg'>{bg}</div><div class='shade-cover'></div>"
+        return (f"{back}<div class='bar'></div>{credit(ph)}"
                 f"<div class='frame'>{top(d)}<div class='cover-mid'>{inner}</div>{foot('옆으로 넘겨서 보기 →', i, n)}</div>")
-    under = f"<div class='bgimg'>{bg}</div><div class='shade-inner'></div>"
+    if ph and ph.get("mode", "full") == "full":
+        under = f"<div class='bgimg'>{photo_layers(ph, False)}</div><div class='shade-inner'></div>"
+    elif ph:
+        under = f"<div class='bgimg'>{bg}</div><div class='shade-inner'></div>{photo_layers(ph, False)}"
+    else:
+        under = f"<div class='bgimg'>{bg}</div><div class='shade-inner'></div>"
     if t == "text":
         bul = "".join(f"<div>{esc(b)}</div>" for b in s["bullets"])
         inner = (f"<div class='label'>{esc(s['label'])}</div><div class='heading'>{esc(s['heading'])}</div>"
