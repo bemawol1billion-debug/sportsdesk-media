@@ -261,3 +261,47 @@ BACKGROUNDS = {"basketball": basketball, "baseball": baseball, "badminton": badm
 def get(sport_key):
     fn = BACKGROUNDS.get(sport_key)
     return fn() if fn else ""
+
+
+def _jersey(i, main, trim, sub, pattern, kind):
+    """팀 컬러 유니폼 일러스트 1벌(500x560 좌표). 로고·글자·등번호 없음."""
+    body = ("M150,40 Q250,78 350,40 L472,112 L432,236 L380,208 L382,538 Q250,566 118,538 "
+            "L120,208 L68,236 L28,112 Z")
+    defs = (f"<clipPath id='jc{i}'><path d='{body}'/></clipPath>"
+            f"<linearGradient id='jl{i}' x1='0' y1='0' x2='1' y2='0'>"
+            "<stop offset='0' stop-color='#000' stop-opacity='0.45'/><stop offset='0.22' stop-color='#000' stop-opacity='0.05'/>"
+            "<stop offset='0.5' stop-color='#fff' stop-opacity='0.16'/><stop offset='0.78' stop-color='#000' stop-opacity='0.08'/>"
+            "<stop offset='1' stop-color='#000' stop-opacity='0.5'/></linearGradient>"
+            f"<linearGradient id='jv{i}' x1='0' y1='0' x2='0' y2='1'>"
+            "<stop offset='0' stop-color='#fff' stop-opacity='0.10'/><stop offset='1' stop-color='#000' stop-opacity='0.35'/></linearGradient>")
+    fill = f"<path d='{body}' fill='{main}'/>"
+    if pattern == "stripes":
+        fill += f"<g clip-path='url(#jc{i})'>" + "".join(
+            f"<rect x='{x}' y='0' width='42' height='600' fill='{sub}'/>" for x in range(36, 480, 84)) + "</g>"
+    if pattern == "hoop":
+        fill += f"<g clip-path='url(#jc{i})'><rect x='0' y='250' width='520' height='70' fill='{sub}'/></g>"
+    folds = (f"<g clip-path='url(#jc{i})' fill='none' stroke='#000' stroke-opacity='0.16' stroke-width='10' stroke-linecap='round'>"
+             "<path d='M170,250 Q200,380 165,520'/><path d='M330,260 Q300,390 340,525'/><path d='M120,215 Q160,240 175,300'/>"
+             "<path d='M380,215 Q340,240 325,300'/></g>")
+    trims = (f"<path d='M150,40 Q250,{118 if kind == 'baseball' else 96} 350,40' fill='none' stroke='{trim}' stroke-width='16'/>"
+             f"<path d='M432,236 L472,112' stroke='{trim}' stroke-width='18'/><path d='M68,236 L28,112' stroke='{trim}' stroke-width='18'/>"
+             f"<path d='M120,208 L120,540 M382,208 L382,540' stroke='{trim}' stroke-width='8' stroke-opacity='0.9'/>")
+    if kind == "baseball":
+        trims += (f"<path d='M262,96 L262,548' stroke='{trim}' stroke-width='9'/>"
+                  + "".join(f"<circle cx='250' cy='{y}' r='7' fill='{trim}' stroke='#000' stroke-opacity='0.3' stroke-width='2'/>"
+                            for y in range(140, 520, 64)))
+    shade = f"<path d='{body}' fill='url(#jl{i})'/><path d='{body}' fill='url(#jv{i})'/>"
+    outline = f"<path d='{body}' fill='none' stroke='#DDE6F0' stroke-opacity='0.35' stroke-width='4'/>"
+    return defs, fill + folds + trims + shade + outline
+
+
+def jerseys(items, kind="baseball"):
+    """표지 전경용 유니폼 2벌(마주 보게). items: [{main, trim, sub?, pattern?}, ...]"""
+    defs, body = "", ""
+    places = [(150, 850, -8, 0.82), (520, 850, 8, 0.82)] if len(items) == 2 else [(330, 820, 0, 0.9)]
+    for i, (it, (x, y, rot, sc)) in enumerate(zip(items, places)):
+        d, g = _jersey(i, it["main"], it["trim"], it.get("sub", it["trim"]), it.get("pattern", "plain"), kind)
+        defs += d
+        body += (f"<g transform='translate({x},{y}) rotate({rot} 250 300) scale({sc})' filter='url(#jsh)'>{g}</g>")
+    defs += "<filter id='jsh' x='-20%' y='-20%' width='140%' height='140%'><feDropShadow dx='0' dy='24' stdDeviation='22' flood-color='#000' flood-opacity='0.6'/></filter>"
+    return (f"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {W} {H}' width='{W}' height='{H}'><defs>{defs}</defs>{body}</svg>")

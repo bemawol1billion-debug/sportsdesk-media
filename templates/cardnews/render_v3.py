@@ -186,7 +186,11 @@ def slide(d, s, i, n):
                  f"<div class='hook'>{esc(s['hook'])}</div>"
                  f"<div class='csub'>{esc(s['sub'])}</div></div>"
                  f"<div class='badge'><div class='v'>{esc(s['badge_v'])}</div><div class='l'>{esc(s['badge_l'])}</div></div>")
-        if ph and ph.get("mode", "full") == "full":
+        if s.get("jerseys"):
+            jz = backgrounds.jerseys(s["jerseys"], d.get("sport_key", "baseball"))
+            back = (f"<div class='bgimg'>{bg}</div><div class='shade-cover'></div>"
+                    f"<div class='bgimg' style='background:rgba(5,8,15,0.45)'></div><div class='bgimg'>{jz}</div>")
+        elif ph and ph.get("mode", "full") == "full":
             back = f"<div class='bgimg'>{photo_layers(ph, True)}</div><div class='shade-photo'></div>"
         elif ph:
             back = f"<div class='bgimg'>{bg}</div><div class='shade-cover'></div>{photo_layers(ph, True)}"
