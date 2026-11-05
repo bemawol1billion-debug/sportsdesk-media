@@ -153,6 +153,25 @@ body {{ width:{W}px; height:{H}px; background:{NAVY}; color:{WHITE}; font-family
 .ph-cut-shade {{ position:absolute; inset:0; background:linear-gradient(90deg, rgba(5,8,15,0.80) 0%, rgba(5,8,15,0.35) 45%, rgba(5,8,15,0) 70%); }}
 .shade-photo {{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(5,8,15,0.92) 0%, rgba(5,8,15,0.70) 28%, rgba(5,8,15,0.15) 52%, rgba(5,8,15,0.45) 80%, rgba(5,8,15,0.92) 100%); }}
 .ph-credit {{ position:absolute; z-index:3; right:84px; bottom:142px; font-size:20px; color:rgba(245,242,235,0.75); font-weight:700; text-shadow:0 2px 8px rgba(0,0,0,0.8); }}
+.b-top {{ display:flex; justify-content:space-between; align-items:flex-start; }}
+.b-brand {{ font-weight:900; font-size:30px; letter-spacing:3px; display:flex; gap:14px; align-items:center; }}
+.b-brand i {{ width:10px; height:44px; background:{acc}; display:block; }}
+.b-brand small {{ display:block; font-size:18px; letter-spacing:2px; color:{MUTED}; font-weight:700; margin-top:4px; }}
+.b-tag {{ font-size:24px; font-weight:900; color:{acc}; letter-spacing:2px; border:2px solid {acc}; padding:8px 16px; }}
+.b-mid {{ flex:1; display:flex; flex-direction:column; justify-content:flex-end; padding-bottom:30px; position:relative; }}
+.b-chip {{ align-self:flex-start; background:{acc}; color:#0A0C10; font-size:28px; font-weight:900; padding:8px 20px; border-radius:30px; margin-bottom:22px; }}
+.b-kw {{ font-family:'Noto Sans CJK KR Black','Noto Sans CJK KR',sans-serif; font-weight:900; color:{acc}; line-height:1.0; letter-spacing:-5px; transform:scaleX(0.94); transform-origin:left; text-shadow:0 6px 0 rgba(0,0,0,0.35), 0 10px 40px rgba(0,0,0,0.8); }}
+.b-hook {{ font-family:'Noto Sans CJK KR Black','Noto Sans CJK KR',sans-serif; font-weight:900; color:#FFFFFF; font-size:104px; line-height:1.08; letter-spacing:-4px; margin-top:10px; transform:scaleX(0.94); transform-origin:left; text-shadow:0 6px 0 rgba(0,0,0,0.35), 0 10px 40px rgba(0,0,0,0.85); }}
+.b-brush {{ margin-top:-14px; margin-left:-6px; opacity:0.95; }}
+.b-sub {{ margin-top:30px; font-size:34px; font-weight:700; line-height:1.5; color:#E9EDF2; text-shadow:0 3px 14px rgba(0,0,0,0.9); }}
+.b-sub em {{ font-style:normal; color:{acc}; }}
+.b-arrow {{ position:absolute; right:40px; top:40px; }}
+.b-sparks {{ position:absolute; }}
+.b-bottom {{ display:flex; justify-content:space-between; align-items:flex-end; }}
+.hero {{ position:absolute; inset:0; }}
+.hero img.cut {{ position:absolute; bottom:0; right:-40px; height:1080px; filter:drop-shadow(0 30px 50px rgba(0,0,0,0.7)); }}
+.hero .obj {{ position:absolute; right:-120px; top:300px; filter:drop-shadow(0 0 80px rgba(255,214,10,0.25)); }}
+.bshade {{ position:absolute; inset:0; background:linear-gradient(90deg, rgba(7,9,13,0.85) 0%, rgba(7,9,13,0.45) 50%, rgba(7,9,13,0) 75%), linear-gradient(180deg, rgba(7,9,13,0.6) 0%, rgba(7,9,13,0) 25%, rgba(7,9,13,0) 70%, rgba(7,9,13,0.85) 100%); }}
 .vsub {{ margin-top:14px; font-size:28px; color:{MUTED}; text-align:center; font-weight:700; }}
 """
 
@@ -170,6 +189,36 @@ def kicker(d):
     return f"<div><div class='kicker'>{esc(d['sport_en'])}<span class='tag'>· {esc(d['tag'])}</span></div></div>"
 
 
+def cover_bold(d, s, i, n, ph):
+    sport_acc = ACCENTS.get(d.get("sport_key", "default"), ACCENTS["default"])
+    bk = backgrounds.bokeh(sport_acc)
+    if ph and ph.get("mode") == "cutout":
+        hero = f"<img class='cut' src='{photo_uri(ph['src'])}' style='height:{ph.get('height', 1080)}px;right:{ph.get('right', -40)}px'>"
+        back = f"<div class='bgimg'>{bk}</div><div class='hero'>{hero}</div><div class='bshade'></div>"
+    elif ph:
+        back = (f"<div class='bgimg'>{photo_layers(ph, True)}</div><div class='bshade'></div>")
+    elif s.get("jerseys"):
+        back = (f"<div class='bgimg'>{bk}</div><div class='hero'>{backgrounds.jerseys(s['jerseys'], d.get('sport_key', 'baseball'), 'bold')}</div>"
+                "<div class='bshade' style='opacity:0.6'></div>")
+    else:
+        back = (f"<div class='bgimg'>{bk}</div><div class='hero'><div class='obj'>{backgrounds.ball(d.get('sport_key', ''))}</div></div>"
+                "<div class='bshade'></div>")
+    kw = s["keyword"]
+    size = s.get("kw_size") or (230 if len(kw) <= 3 else 170 if len(kw) <= 6 else 130)
+    chip = f"<div class='b-chip'>🗳 {esc(s['vote_chip'])}</div>" if s.get("vote_chip") else ""
+    sub = esc(s["sub"]).replace("[", "<em>").replace("]", "</em>")
+    tag = f"#{esc(d['tag'])}"
+    inner = (f"<div class='b-top'><div class='b-brand'><i></i><div>SPORTS DESK<small>{esc(d['sport_en'])} · {esc(d['date'])}</small></div></div>"
+             f"<div class='b-tag'>{tag}</div></div>"
+             f"<div class='b-mid'><div class='b-arrow'>{backgrounds.doodle_arrow()}</div>{chip}"
+             f"<div class='b-kw' style='font-size:{size}px'>{esc(kw)}</div>"
+             f"<div class='b-hook'>{esc(s['hook'])}</div>"
+             f"<div class='b-brush'>{backgrounds.brush(w=s.get('brush_w', 460))}</div>"
+             f"<div class='b-sub'>{sub}</div></div>"
+             f"<div class='b-bottom'><div class='badge'><div class='v'>{esc(s['badge_v'])}</div><div class='l'>{esc(s['badge_l'])}</div></div></div>")
+    return (f"{back}{credit(ph)}<div class='frame'>{inner}{foot('옆으로 넘겨서 보기 →', i, n)}</div>")
+
+
 def slide(d, s, i, n):
     t = s["type"]
     src = "출처 · " + s["source"] if s.get("source") else ""
@@ -177,6 +226,11 @@ def slide(d, s, i, n):
     ph = s.get("photo", d.get("photo") if (t == "cover" or d.get("photo", {}).get("inner", False)) else None)
     if s.get("photo") is False:
         ph = None
+    bold = d.get("style") == "bold"
+    if bold:
+        bg = backgrounds.bokeh(ACCENTS.get(d.get("sport_key", "default"), ACCENTS["default"]), seed=i)
+    if t == "cover" and bold:
+        return cover_bold(d, s, i, n, ph)
     if t == "cover":
         kw = s["keyword"]
         size = s.get("kw_size") or (250 if len(kw) <= 3 else 190 if len(kw) <= 5 else 150)
@@ -262,6 +316,8 @@ def slide(d, s, i, n):
 def main(path, out_dir):
     d = json.loads(Path(path).read_text(encoding="utf-8"))
     acc = ACCENTS.get(d.get("sport_key", "default"), ACCENTS["default"])
+    if d.get("style") == "bold":
+        acc = "#FFD60A"
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     n = len(d["slides"])
@@ -269,7 +325,10 @@ def main(path, out_dir):
         b = p.chromium.launch()
         pg = b.new_page(viewport={"width": W, "height": H})
         for i, s in enumerate(d["slides"], 1):
-            pg.set_content(f"<html><head><meta charset='utf-8'><style>{css(acc)}</style></head>"
+            extra = (".shade-inner { background:rgba(7,9,13,0.80) !important; } body { background:#07090D !important; }"
+                     ".heading, .big, .sum, .vq { font-family:'Noto Sans CJK KR Black','Noto Sans CJK KR',sans-serif; letter-spacing:-2px; }"
+                     if d.get("style") == "bold" else "")
+            pg.set_content(f"<html><head><meta charset='utf-8'><style>{css(acc)}{extra}</style></head>"
                            f"<body>{slide(d, s, i, n)}</body></html>")
             pg.wait_for_timeout(120)
             if pg.evaluate(f"document.querySelector('.frame').scrollHeight > {H}"):

@@ -295,13 +295,68 @@ def _jersey(i, main, trim, sub, pattern, kind):
     return defs, fill + folds + trims + shade + outline
 
 
-def jerseys(items, kind="baseball"):
+def jerseys(items, kind="baseball", layout="classic"):
     """표지 전경용 유니폼 2벌(마주 보게). items: [{main, trim, sub?, pattern?}, ...]"""
     defs, body = "", ""
-    places = [(150, 850, -8, 0.82), (520, 850, 8, 0.82)] if len(items) == 2 else [(330, 820, 0, 0.9)]
+    if layout == "bold":
+        places = [(330, 190, -10, 0.92), (560, 300, 9, 0.92)] if len(items) == 2 else [(520, 220, 6, 1.05)]
+    else:
+        places = [(150, 850, -8, 0.82), (520, 850, 8, 0.82)] if len(items) == 2 else [(330, 820, 0, 0.9)]
     for i, (it, (x, y, rot, sc)) in enumerate(zip(items, places)):
         d, g = _jersey(i, it["main"], it["trim"], it.get("sub", it["trim"]), it.get("pattern", "plain"), kind)
         defs += d
         body += (f"<g transform='translate({x},{y}) rotate({rot} 250 300) scale({sc})' filter='url(#jsh)'>{g}</g>")
     defs += "<filter id='jsh' x='-20%' y='-20%' width='140%' height='140%'><feDropShadow dx='0' dy='24' stdDeviation='22' flood-color='#000' flood-opacity='0.6'/></filter>"
     return (f"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {W} {H}' width='{W}' height='{H}'><defs>{defs}</defs>{body}</svg>")
+
+
+def bokeh(tint="#FFD60A", seed=7):
+    """경기장 조명 보케 배경(사람·로고 없음). bold 스타일 공용."""
+    import random
+    rnd = random.Random(seed)
+    lights = ""
+    for _ in range(46):
+        x, y = rnd.randint(-40, 1120), rnd.randint(40, 820)
+        r = rnd.choice([10, 14, 18, 26, 34, 46])
+        col = rnd.choice(["#FFF4D6", "#FFFFFF", "#CFE3FF", tint])
+        op = rnd.uniform(0.10, 0.45)
+        lights += f"<circle cx='{x}' cy='{y}' r='{r}' fill='{col}' opacity='{op:.2f}'/>"
+    body = f"""
+    <rect width='1080' height='1440' fill='#07090D'/>
+    <radialGradient id='bkA' cx='0.75' cy='0.2' r='0.7'><stop offset='0' stop-color='#2B3A55' stop-opacity='0.9'/><stop offset='1' stop-color='#07090D' stop-opacity='0'/></radialGradient>
+    <radialGradient id='bkB' cx='0.15' cy='0.05' r='0.5'><stop offset='0' stop-color='{tint}' stop-opacity='0.20'/><stop offset='1' stop-color='#07090D' stop-opacity='0'/></radialGradient>
+    <linearGradient id='bkF' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#0F3A22' stop-opacity='0'/><stop offset='1' stop-color='#0F3A22' stop-opacity='0.55'/></linearGradient>
+    <rect width='1080' height='1440' fill='url(#bkA)'/><rect width='1080' height='1440' fill='url(#bkB)'/>
+    <g filter='url(#glow)'>{lights}</g>
+    <rect x='0' y='980' width='1080' height='460' fill='url(#bkF)'/>
+    """
+    return _wrap("", body)
+
+
+def doodle_arrow(color="#FFD60A"):
+    """손글씨 느낌 곡선 화살표 + 강조선."""
+    return (f"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 120' width='260' height='120'>"
+            f"<path d='M12,92 C60,20 150,10 214,40' fill='none' stroke='{color}' stroke-width='6' stroke-linecap='round' stroke-dasharray='2 14'/>"
+            f"<path d='M196,22 L222,42 L192,58' fill='none' stroke='{color}' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/>"
+            "</svg>")
+
+
+def sparks(color="#FFD60A"):
+    return (f"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90' width='90' height='90' fill='none' stroke='{color}' stroke-width='7' stroke-linecap='round'>"
+            "<path d='M20,58 L8,72'/><path d='M40,46 L36,20'/><path d='M58,56 L80,40'/></svg>")
+
+
+def brush(color="#FFD60A", w=520):
+    return (f"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 40' width='{w}' height='{int(w * 40 / 520)}' preserveAspectRatio='none'>"
+            f"<path d='M6,26 C120,10 300,6 512,14 C420,20 260,26 120,34 C80,36 30,36 6,26 Z' fill='{color}'/></svg>")
+
+
+def ball(kind):
+    """히어로 오브젝트(사진이 없을 때): 종목 공/장비 큰 일러스트."""
+    if kind == "baseball":
+        return ("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600' width='600' height='600'>"
+                "<defs><radialGradient id='hb' cx='0.36' cy='0.3' r='0.8'><stop offset='0' stop-color='#fff'/><stop offset='0.6' stop-color='#E6E2D8'/><stop offset='1' stop-color='#8C877C'/></radialGradient>"
+                "<clipPath id='hbc'><circle cx='300' cy='300' r='280'/></clipPath></defs>"
+                "<circle cx='300' cy='300' r='280' fill='url(#hb)'/><g clip-path='url(#hbc)' fill='none' stroke='#C8102E' stroke-width='9' stroke-dasharray='16 12'>"
+                "<path d='M120,40 Q260,300 120,560'/><path d='M480,40 Q340,300 480,560'/></g></svg>")
+    return ""
