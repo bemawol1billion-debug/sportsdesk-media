@@ -290,7 +290,13 @@ def _jersey(i, main, trim, sub, pattern, kind):
         trims += (f"<path d='M262,96 L262,548' stroke='{trim}' stroke-width='9'/>"
                   + "".join(f"<circle cx='250' cy='{y}' r='7' fill='{trim}' stroke='#000' stroke-opacity='0.3' stroke-width='2'/>"
                             for y in range(140, 520, 64)))
-    shade = f"<path d='{body}' fill='url(#jl{i})'/><path d='{body}' fill='url(#jv{i})'/>"
+    # 실제 구단 로고·스폰서 자리에는 스포츠데스크 마크만 넣는다
+    mark = (f"<g clip-path='url(#jc{i})'>"
+            f"<path d='M318,128 L372,128 L372,170 Q372,198 345,210 Q318,198 318,170 Z' fill='{trim}' stroke='#000' stroke-opacity='0.25' stroke-width='3'/>"
+            f"<text x='345' y='178' text-anchor='middle' font-family='Noto Sans CJK KR' font-weight='900' font-size='26' fill='{main}'>SD</text>"
+            f"<text x='250' y='300' text-anchor='middle' font-family='Noto Sans CJK KR' font-weight='900' font-size='27' "
+            f"letter-spacing='1' fill='{trim}' stroke='#000' stroke-opacity='0.2' stroke-width='1.5'>SPORTS DESK</text></g>")
+    shade = mark + f"<path d='{body}' fill='url(#jl{i})'/><path d='{body}' fill='url(#jv{i})'/>"
     outline = f"<path d='{body}' fill='none' stroke='#DDE6F0' stroke-opacity='0.35' stroke-width='4'/>"
     return defs, fill + folds + trims + shade + outline
 
