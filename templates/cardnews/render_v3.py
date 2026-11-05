@@ -201,8 +201,8 @@ def cover_bold(d, s, i, n, ph):
         back = (f"<div class='bgimg'>{bk}</div><div class='hero'>{backgrounds.jerseys(s['jerseys'], d.get('sport_key', 'baseball'), 'bold')}</div>"
                 "<div class='bshade' style='opacity:0.6'></div>")
     else:
-        back = (f"<div class='bgimg'>{bk}</div><div class='hero'><div class='obj'>{backgrounds.ball(d.get('sport_key', ''))}</div></div>"
-                "<div class='bshade'></div>")
+        # 실사 이미지가 없으면 일러스트 없이 조명 배경 + 큰 글씨만 (2026-11-05: 애니메이션 느낌 금지)
+        back = f"<div class='bgimg'>{bk}</div><div class='bshade'></div>"
     kw = s["keyword"]
     size = s.get("kw_size") or (230 if len(kw) <= 3 else 170 if len(kw) <= 6 else 130)
     chip = f"<div class='b-chip'>🗳 {esc(s['vote_chip'])}</div>" if s.get("vote_chip") else ""
