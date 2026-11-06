@@ -11,7 +11,13 @@
   "follow_up": false,
   "event_date": "2027 스포츠강좌이용권 신청 2026-11-09~27 (지자체 공고 11/4 기준)",
   "publish_at": "queue 2026-11-07",
-  "image": "글씨판",
+  "image": {
+    "tool": "Canva generate-image",
+    "canva_media_id": "MAHaG4TYJrY",
+    "link": "https://www.canva.com/M/MAHaG4TYJrY",
+    "prompt": "indoor swimming pool with lane ropes and kickboards, no people",
+    "status": "사용자가 내려받아 채팅에 올리면 표지에 넣음"
+  },
   "evidence": [
     {
       "fact": "신청 11/9~27 전국 동시, 온라인 누리집 또는 주소지 행정복지센터 방문",
