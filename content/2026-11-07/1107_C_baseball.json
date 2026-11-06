@@ -11,12 +11,12 @@
   "follow_up_of": "2026-11-06 KS 3차전 누가 이길까(설문형)",
   "poll_question_type": "승부(누가 이길까)",
   "event_date": "2026-11-07 14:00 한국시리즈 4차전(대구) 프리뷰 + 11/6 3차전 삼성 5-1",
-  "publish_at": "manual (권장 2026-11-07 12:30, 경기 시작 14:00 전)",
+  "publish_at": "manual (권장 2026-11-07 12:30, 경기 14:00 전)",
   "image_prompt": "Photorealistic sports magazine photo of a professional baseball pitcher in a blue and white uniform (no logos, no letters, no numbers) mid-delivery on the mound at a packed stadium at night, a batter in a black and red uniform waiting in the distance, dramatic stadium lighting, dark moody background with bokeh, subject on the right side of the frame, generic athletes, no text, no logos",
   "image": {
     "tool": "Canva generate-image",
     "link": "https://www.canva.com/M/MAHaLMZxrYw",
-    "status": "사용자가 내려받아 채팅에 올리면 표지에 넣음",
+    "status": "글씨판으로 제작(이미지 미첨부, 11/7 08:31 \"제작\")",
     "canva_media_id": "MAHaLMZxrYw"
   },
   "evidence": [
@@ -141,6 +141,6 @@
       "source": "톱스타뉴스, 뉴스1, 헤럴드경제"
     }
   ],
-  "caption": "🗳 KS 4차전, 삼성이냐 kt냐! 오늘 누가 이길까? ⚾\n\n삼성이 6일 3차전에서 후라도의 7이닝 1실점 호투로 kt를 5-1로 꺾고 시리즈 2승 1패로 앞섰다. 오늘(7일) 오후 2시 대구에서 4차전이 열린다.\n\nkt는 로건, 삼성은 신인 장찬희를 선발로 내세우고 불펜을 총동원한다. 삼성이 이기면 우승까지 1승, kt가 이기면 2승 2패 원점이다.\n\n아래 설문에 투표하고, 그렇게 생각한 이유를 댓글로 남겨주세요 👇\n\n출처: 헤럴드경제, 세계일보, 톱스타뉴스, 뉴스1, 머니투데이 / 이미지: AI 생성\n\n#한국시리즈 #kt위즈 #삼성라이온즈 #KBO #프로야구",
+  "caption": "🗳 KS 4차전, 삼성이냐 kt냐! 오늘 누가 이길까? ⚾\n\n삼성이 6일 3차전에서 후라도의 7이닝 1실점 호투로 kt를 5-1로 꺾고 시리즈 2승 1패로 앞섰다. 오늘(7일) 오후 2시 대구에서 4차전이 열린다.\n\nkt는 로건, 삼성은 신인 장찬희를 선발로 내세우고 불펜을 총동원한다. 삼성이 이기면 우승까지 1승, kt가 이기면 2승 2패 원점이다.\n\n아래 설문에 투표하고, 그렇게 생각한 이유를 댓글로 남겨주세요 👇\n\n출처: 헤럴드경제, 세계일보, 톱스타뉴스, 뉴스1, 머니투데이\n\n#한국시리즈 #kt위즈 #삼성라이온즈 #KBO #프로야구",
   "vote": true
 }
