@@ -1,0 +1,146 @@
+{
+  "date": "2026.11.07",
+  "weekday": "SAT",
+  "style": "bold",
+  "sport_key": "baseball",
+  "sport_en": "BASEBALL",
+  "tag": "한국시리즈 4차전",
+  "post_type": "poll",
+  "content_kind": "recent",
+  "follow_up": true,
+  "follow_up_of": "2026-11-06 KS 3차전 누가 이길까(설문형)",
+  "poll_question_type": "승부(누가 이길까)",
+  "event_date": "2026-11-07 14:00 한국시리즈 4차전(대구) 프리뷰 + 11/6 3차전 삼성 5-1",
+  "publish_at": "manual (권장 2026-11-07 12:30, 경기 시작 14:00 전)",
+  "image_prompt": "Photorealistic sports magazine photo of a professional baseball pitcher in a blue and white uniform (no logos, no letters, no numbers) mid-delivery on the mound at a packed stadium at night, a batter in a black and red uniform waiting in the distance, dramatic stadium lighting, dark moody background with bokeh, subject on the right side of the frame, generic athletes, no text, no logos",
+  "image": {
+    "tool": "Canva generate-image",
+    "link": "https://www.canva.com/M/MAHaLMZxrYw",
+    "status": "사용자가 내려받아 채팅에 올리면 표지에 넣음",
+    "canva_media_id": "MAHaLMZxrYw"
+  },
+  "evidence": [
+    {
+      "fact": "3차전 11/6 대구 삼성 5-1, 시리즈 삼성 2승 1패",
+      "sources": [
+        "헤럴드경제 11/6",
+        "세계일보 11/6",
+        "톱스타뉴스 11/6",
+        "국제뉴스 11/6"
+      ]
+    },
+    {
+      "fact": "후라도 7이닝 6피안타 1실점 6K 108구, 구자욱 2회 2타점 3루타, 박승규 8회 솔로",
+      "sources": [
+        "헤럴드경제",
+        "세계일보"
+      ]
+    },
+    {
+      "fact": "소형준 6이닝 4실점 볼넷 5, 안타 kt 7·삼성 4",
+      "sources": [
+        "헤럴드경제 (볼넷·안타 1곳)",
+        "세계일보(1·2회 제구 난조)"
+      ]
+    },
+    {
+      "fact": "1승1패 뒤 3차전 승리팀 우승 18번 중 16번(88.9%)",
+      "sources": [
+        "헤럴드경제",
+        "세계일보",
+        "국제뉴스",
+        "서플(머니투데이)"
+      ]
+    },
+    {
+      "fact": "4차전 11/7 14:00 대구, 선발 kt 로건 vs 삼성 신인 장찬희(불펜 데이)",
+      "sources": [
+        "톱스타뉴스",
+        "뉴스1",
+        "서플(머니투데이)",
+        "국제뉴스"
+      ]
+    },
+    {
+      "fact": "로건 정규시즌 7승 5패 ERA 3.59, 장찬희 41경기 4승 5패 ERA 4.50",
+      "sources": [
+        "톱스타뉴스 (1곳)"
+      ]
+    }
+  ],
+  "poll_options": [
+    "kt 위즈",
+    "삼성 라이온즈"
+  ],
+  "slides": [
+    {
+      "type": "cover",
+      "keyword": "KS 4차전",
+      "kw_size": 170,
+      "vote_chip": "투표 진행중",
+      "hook": "삼성이냐 kt냐,\n오늘 누가 이길까?",
+      "sub": "삼성 2승 1패 리드, 오늘 [오후 2시] 대구\n당신의 판단은? [설문에서 투표]",
+      "badge_v": "14:00",
+      "badge_l": "오늘 대구\n삼성라이온즈파크"
+    },
+    {
+      "type": "text",
+      "label": "3차전에 무슨 일이",
+      "heading": "후라도 7이닝,\n삼성 5-1 승",
+      "bullets": [
+        "삼성이 6일 대구 3차전에서 kt를 5-1로 꺾고 시리즈 2승 1패로 앞섰다.",
+        "후라도가 7이닝 1실점으로 버텼고, 구자욱의 2타점 3루타와 박승규의 8회 솔로포가 나왔다.",
+        "kt는 안타 수(7-4)에서 앞섰지만 득점권에서 한 방이 나오지 않았다."
+      ],
+      "source": "헤럴드경제, 세계일보, 톱스타뉴스"
+    },
+    {
+      "type": "compare",
+      "label": "4차전 관전 포인트",
+      "heading": "3승 선점이냐,\n2-2 원점이냐",
+      "teams": [
+        "kt 위즈",
+        "삼성 라이온즈"
+      ],
+      "rows": [
+        {
+          "l": "이기면 2승 2패\n시리즈 원점",
+          "m": "오늘 승리하면",
+          "r": "이기면 3승 1패\n우승까지 1승"
+        },
+        {
+          "l": "로건\n정규시즌 7승",
+          "m": "오늘 선발",
+          "r": "신인 장찬희\n생애 첫 KS 선발"
+        },
+        {
+          "l": "3차전 안타 7개\n타선 감은 살아 있다",
+          "m": "믿는 구석",
+          "r": "불펜 총동원\n'불펜 데이' 예고"
+        }
+      ],
+      "source": "톱스타뉴스, 뉴스1, 서플(머니투데이)"
+    },
+    {
+      "type": "vote",
+      "label": "당신의 선택은?",
+      "question": "KS 4차전,\n누가 이길까?",
+      "options": [
+        {
+          "key": "A",
+          "text": "kt 위즈",
+          "desc": "선발 로건 · 3차전 안타 7개\n이기면 2승 2패 원점"
+        },
+        {
+          "key": "B",
+          "text": "삼성 라이온즈",
+          "desc": "안방 라팍 · 불펜 총동원\n이기면 우승까지 1승"
+        }
+      ],
+      "sub": "응원하는 팀이 이길 이유를 댓글로 남겨주세요",
+      "source": "톱스타뉴스, 뉴스1, 헤럴드경제"
+    }
+  ],
+  "caption": "🗳 KS 4차전, 삼성이냐 kt냐! 오늘 누가 이길까? ⚾\n\n삼성이 6일 3차전에서 후라도의 7이닝 1실점 호투로 kt를 5-1로 꺾고 시리즈 2승 1패로 앞섰다. 오늘(7일) 오후 2시 대구에서 4차전이 열린다.\n\nkt는 로건, 삼성은 신인 장찬희를 선발로 내세우고 불펜을 총동원한다. 삼성이 이기면 우승까지 1승, kt가 이기면 2승 2패 원점이다.\n\n아래 설문에 투표하고, 그렇게 생각한 이유를 댓글로 남겨주세요 👇\n\n출처: 헤럴드경제, 세계일보, 톱스타뉴스, 뉴스1, 머니투데이 / 이미지: AI 생성\n\n#한국시리즈 #kt위즈 #삼성라이온즈 #KBO #프로야구",
+  "vote": true
+}
