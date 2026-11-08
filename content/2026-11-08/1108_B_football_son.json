@@ -1,0 +1,148 @@
+{
+  "date": "2026.11.08",
+  "weekday": "SUN",
+  "style": "bold",
+  "sport_key": "football",
+  "sport_en": "FOOTBALL",
+  "tag": "MLS 플레이오프",
+  "post_type": "normal",
+  "content_kind": "recent",
+  "topic_kind": "최근(인물형)",
+  "follow_up": false,
+  "event_date": "2026-11-08(KST) MLS 정규리그 최종전 LAFC 1-2 시애틀 → PO 1라운드 상대 세인트루이스(정상빈) 확정, 1라운드 20~21일 시작",
+  "publish_at": "2026-11-08 21:00 예약(안)",
+  "image_prompt": "Photorealistic sports magazine photo of a professional soccer forward in a black jersey with gold trim (no logos, no letters, no numbers) dribbling the ball at speed under stadium lights at night in a playoff match, seen from the side, face not visible in detail, dramatic lighting, dark moody background with bokeh, subject on the right side of the frame, generic athlete, no text, no logos",
+  "image": {
+    "tool": "Canva generate-image",
+    "canva_media_id": "MAHaS4p2LR4",
+    "link": "https://www.canva.com/M/MAHaS4p2LR4",
+    "status": "사용자가 내려받아 채팅에 올리면 표지에 넣음"
+  },
+  "evidence": [
+    {
+      "fact": "11/8 최종전 LAFC 1-2 시애틀, 손흥민 풀타임 공격포인트 없음",
+      "sources": [
+        "MK스포츠 11/8",
+        "스포츠월드 11/8",
+        "톱스타뉴스 11/8",
+        "포포투 11/8"
+      ]
+    },
+    {
+      "fact": "LAFC 12승 11무 11패 승점 47 서부 6위",
+      "sources": [
+        "MK스포츠",
+        "톱스타뉴스"
+      ]
+    },
+    {
+      "fact": "PO 1라운드 상대 서부 3위 세인트루이스 시티(정상빈 소속)",
+      "sources": [
+        "MK스포츠",
+        "톱스타뉴스"
+      ]
+    },
+    {
+      "fact": "1라운드 3전 2선승제, 상위 4팀이 1·3차전 홈(LAFC 1차전 원정)",
+      "sources": [
+        "포포투 10/26",
+        "SPOTV 11/2"
+      ]
+    },
+    {
+      "fact": "1라운드 시작 20일(스포츠월드)/21일(톱스타) — 날짜 표기 엇갈림",
+      "sources": [
+        "스포츠월드",
+        "톱스타뉴스"
+      ]
+    },
+    {
+      "fact": "손흥민 리그 32경기 7골 15도움",
+      "sources": [
+        "스포츠월드 11/8",
+        "톱스타뉴스 11/8"
+      ]
+    },
+    {
+      "fact": "10/15 오스틴전 이후 4경기 공격포인트 없음, 시즌 첫 리그 골 14경기 만(7/18)",
+      "sources": [
+        "스포츠월드 (1곳)"
+      ]
+    },
+    {
+      "fact": "대표팀 11/13 사우디, 11/17 카타르 원정 A매치",
+      "sources": [
+        "스포츠월드",
+        "1106_C_football 원고(명단 10/29 발표)"
+      ]
+    }
+  ],
+  "slides": [
+    {
+      "type": "cover",
+      "keyword": "손흥민",
+      "kw_size": 200,
+      "hook": "골보다 도움,\nPO에선 해결사?",
+      "sub": "리그 7골 [15도움], 도우미로 보낸 시즌\nPO 1라운드 상대는 [정상빈]의 세인트루이스",
+      "badge_v": "15",
+      "badge_l": "시즌 리그\n도움"
+    },
+    {
+      "type": "text",
+      "label": "무슨 일이 있었나",
+      "heading": "최종전 패배,\n서부 6위로 PO",
+      "bullets": [
+        "LAFC는 8일 정규리그 최종전에서 시애틀에 1-2로 졌고, 손흥민은 풀타임을 뛰었지만 공격포인트가 없었다.",
+        "LAFC는 12승 11무 11패, 서부 6위로 플레이오프 1라운드에 바로 올랐다.",
+        "1라운드 상대는 서부 3위 세인트루이스 시티로, 한국 공격수 정상빈이 뛰는 팀이다."
+      ],
+      "source": "MK스포츠, 스포츠월드, 톱스타뉴스"
+    },
+    {
+      "type": "stats",
+      "label": "숫자로 보는 손흥민",
+      "heading": "골보다\n도움이 두 배",
+      "stats": [
+        {
+          "v": "7골",
+          "l": "리그 32경기\n득점",
+          "size": 84
+        },
+        {
+          "v": "15도움",
+          "l": "리그 32경기\n도움",
+          "size": 84
+        },
+        {
+          "v": "7개",
+          "l": "시즌 첫 10경기에\n쌓은 도움",
+          "size": 84
+        },
+        {
+          "v": "4경기",
+          "l": "10월 15일 이후\n공격포인트 없음",
+          "size": 84
+        }
+      ],
+      "source": "스포츠월드, 톱스타뉴스"
+    },
+    {
+      "type": "why",
+      "label": "관전 포인트",
+      "statement": "3전 2선승,\n[한 번 지면 벼랑]",
+      "body": "1라운드는 3전 2선승제다. 정규리그 상위 4팀이 1·3차전을 안방에서 치르기 때문에 6위 LAFC는 원정에서 시리즈를 시작한다. 시즌 내내 2선에서 동료의 골을 도운 손흥민이 막판 4경기 침묵을 깨고 직접 해결해야 할 무대다. 1라운드는 이달 20일 전후 시작하며, 손흥민은 그 전에 대표팀의 사우디·카타르 원정 2연전을 치른다.",
+      "source": "포포투, SPOTV, 스포츠월드"
+    },
+    {
+      "type": "closing",
+      "summary": "도우미 손흥민,\nPO에선 해결사로",
+      "points": [
+        "리그 7골 15도움, 서부 6위로 PO 직행.",
+        "1라운드 상대는 정상빈의 세인트루이스."
+      ],
+      "cta": "저장해두고\n응원 댓글을 남겨주세요",
+      "source": ""
+    }
+  ],
+  "caption": "골보다 도움, 손흥민은 PO에서 해결사가 될까 ⚽\n\nLAFC는 8일 정규리그 최종전에서 시애틀에 1-2로 졌지만 서부 6위로 플레이오프 1라운드에 직행했다. 상대는 서부 3위 세인트루이스 시티, 정상빈이 뛰는 팀이다.\n\n손흥민은 리그 32경기 7골 15도움으로 시즌을 마쳤다. 2선에서 동료의 골을 돕는 역할이 커졌지만, 10월 중순 이후 4경기째 공격포인트가 없다. 1라운드는 3전 2선승제로 이달 20일 전후 시작한다.\n\n📌 저장해두고 PO 일정 챙기기\n💬 응원 댓글을 남겨주세요\n\n출처: MK스포츠, 스포츠월드, 톱스타뉴스, 포포투, SPOTV\n\n#손흥민 #LAFC #MLS #정상빈 #해외축구"
+}

@@ -1,0 +1,168 @@
+{
+  "date": "2026.11.08",
+  "weekday": "SUN",
+  "style": "bold",
+  "sport_key": "baseball",
+  "sport_en": "SPORTS INFO",
+  "tag": "야구장 생활정보",
+  "post_type": "normal",
+  "content_kind": "info",
+  "topic_kind": "생활정보(시설)",
+  "follow_up": false,
+  "event_date": "2026 시즌 끝 잠실야구장 철거(12월 시작) → 2027~2031 LG·두산 잠실 주경기장 대체구장, 2032 돔구장 목표. 대체구장 공사 현황은 서울신문 2026-07-15 기준",
+  "publish_at": "2026-11-08 17:30 예약(안)",
+  "image_prompt": "Photorealistic sports magazine photo of a newly built baseball field set inside a large oval Olympic athletics stadium at night, green grass infield and dirt diamond, empty blue stadium seats, tall floodlights, construction cranes faintly in the distance, dramatic lighting, dark moody background with bokeh, subject on the right side of the frame, no people, no text, no logos",
+  "image": {
+    "tool": "Canva generate-image",
+    "canva_media_id": "MAHaSwK5tkI",
+    "link": "https://www.canva.com/M/MAHaSwK5tkI",
+    "status": "사용자가 내려받아 채팅에 올리면 표지에 넣음"
+  },
+  "evidence": [
+    {
+      "fact": "잠실야구장 1982년 개장, 2026 시즌 끝으로 철거, 12월 철거 시작",
+      "sources": [
+        "한경BUSINESS 2026-01-05",
+        "서울신문 2026-07-15(철거 후 같은 자리에 돔구장)"
+      ]
+    },
+    {
+      "fact": "2027~2031년 5시즌 LG·두산이 잠실 주경기장 대체구장에서 홈경기",
+      "sources": [
+        "엑스포츠뉴스 2024-07-09",
+        "더팩트 2024-07-09",
+        "경향신문 2024-07-09",
+        "서울신문 2026-07-15(2027년부터 사용 전제)"
+      ]
+    },
+    {
+      "fact": "대체구장 최대 1만8000석(3층·외야석 미운영 기본), 현 잠실 2만3750석",
+      "sources": [
+        "서울신문 2026-07-15",
+        "더팩트 2024-07-09",
+        "한경BUSINESS 2026-01-05(2만3750)",
+        "엑스포츠뉴스(2만3750)"
+      ]
+    },
+    {
+      "fact": "대체구장 펜스 좌우 95m·중앙 124m(현 100m·125m)",
+      "sources": [
+        "서울신문 2026-07-15 (1곳)",
+        "한경BUSINESS(현 구장 규격)"
+      ]
+    },
+    {
+      "fact": "공사 일정: 12월 관중석 공사 마무리, 2027년 1~2월 내부 마감·이주",
+      "sources": [
+        "서울신문 2026-07-15 (1곳)"
+      ]
+    },
+    {
+      "fact": "돔구장 3만 석 이상, 2032년 개장 목표(한경은 3만5000석·2031년 완공)",
+      "sources": [
+        "엑스포츠뉴스 2024-07-09",
+        "한경BUSINESS 2026-01-05",
+        "서울신문 2026-07-15"
+      ]
+    }
+  ],
+  "slides": [
+    {
+      "type": "cover",
+      "keyword": "잠실야구장",
+      "kw_size": 170,
+      "hook": "내년부터 LG·두산\n주경기장에서 뛴다",
+      "sub": "45년 쓴 잠실은 12월 철거 시작\n대체구장 좌석은 [최대 1만8천 석]",
+      "badge_v": "5시즌",
+      "badge_l": "대체구장 사용\n2027~2031"
+    },
+    {
+      "type": "text",
+      "label": "무엇이 바뀌나",
+      "heading": "잠실은 철거,\n옆 주경기장으로",
+      "bullets": [
+        "1982년 문을 연 잠실야구장은 2026 시즌을 끝으로 철거되고, 그 자리에 돔구장이 들어선다.",
+        "LG와 두산은 2027년부터 5시즌 동안 바로 옆 잠실 주경기장 안에 만든 야구장을 홈으로 쓴다.",
+        "주경기장 육상 트랙을 걷어내고 그라운드와 더그아웃·불펜을 새로 깔았다."
+      ],
+      "source": "한경BUSINESS, 엑스포츠뉴스, 서울신문"
+    },
+    {
+      "type": "compare",
+      "label": "지금 잠실 vs 대체구장",
+      "heading": "좌석은 줄고\n담장은 가까워진다",
+      "teams": [
+        "지금 잠실",
+        "대체구장"
+      ],
+      "rows": [
+        {
+          "l": "2만3750석",
+          "m": "좌석",
+          "r": "최대 1만8천 석\n3층·외야석 미운영"
+        },
+        {
+          "l": "100m",
+          "m": "좌우 펜스",
+          "r": "95m\n대신 담장 높임"
+        },
+        {
+          "l": "125m",
+          "m": "중앙 펜스",
+          "r": "124m"
+        },
+        {
+          "l": "1982~2026",
+          "m": "사용 기간",
+          "r": "2027~2031\n5시즌"
+        }
+      ],
+      "source": "서울신문, 한경BUSINESS, 더팩트"
+    },
+    {
+      "type": "dday",
+      "label": "앞으로 일정",
+      "heading": "돔구장까지\n이렇게 간다",
+      "rows": [
+        {
+          "name": "잠실야구장 철거 시작",
+          "region": "",
+          "status": "2026 시즌 종료 후",
+          "d": "12월"
+        },
+        {
+          "name": "대체구장 공사 마무리",
+          "region": "",
+          "status": "관중석 공사 연내 마감 계획",
+          "d": "12월"
+        },
+        {
+          "name": "내부 마감·구단 이주",
+          "region": "",
+          "status": "임시사용허가 뒤 이주",
+          "d": "27년 1~2월"
+        },
+        {
+          "name": "잠실 돔구장 개장",
+          "region": "",
+          "status": "3만 석 이상 · 목표 시점",
+          "d": "2032년",
+          "dim": true
+        }
+      ],
+      "note": "공사 일정은 서울시 계획 기준(서울신문 7월 보도)으로, 바뀔 수 있어요. 좌석이 줄어 인기 경기는 예매가 더 빨리 끝날 수 있어요.",
+      "source": "서울신문, 한경BUSINESS, 엑스포츠뉴스"
+    },
+    {
+      "type": "closing",
+      "summary": "내년 잠실 직관,\n이것만 기억",
+      "points": [
+        "LG·두산 홈은 잠실 주경기장 안 야구장.",
+        "좌석 최대 1만8천 석, 예매는 서둘러야."
+      ],
+      "cta": "저장해두고\n직관 메이트를 태그하세요",
+      "source": ""
+    }
+  ],
+  "caption": "내년부터 LG·두산은 잠실 주경기장에서 뛴다 ⚾\n\n1982년 문을 연 잠실야구장이 2026 시즌을 끝으로 철거되고, 그 자리에 돔구장이 들어선다. LG와 두산은 2027년부터 5시즌 동안 바로 옆 잠실 주경기장 안에 새로 만든 야구장을 홈으로 쓴다.\n\n대체구장 좌석은 최대 1만8천 석으로 지금(2만3750석)보다 줄고, 좌우 담장은 95m로 조금 가까워진다. 인기 경기는 예매 경쟁이 더 치열해질 수 있다. 돔구장은 2032년 개장이 목표다.\n\n📌 저장해두고 내년 직관 계획 세우기\n👥 직관 메이트를 태그하세요\n\n출처: 서울신문, 한경BUSINESS, 엑스포츠뉴스, 더팩트\n\n#잠실야구장 #잠실돔구장 #LG트윈스 #두산베어스 #직관"
+}
