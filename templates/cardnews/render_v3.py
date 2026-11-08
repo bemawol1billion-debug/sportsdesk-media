@@ -74,6 +74,8 @@ body {{ width:{W}px; height:{H}px; background:{NAVY}; color:{WHITE}; font-family
 .foot {{ margin-top:auto; display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
   font-size:24px; color:{MUTED}; padding-top:24px; border-top:2px solid {LINE}; }}
 .foot b {{ color:{WHITE}; }}
+.foot .pg {{ white-space:nowrap; flex:none; }}
+.foot .hd {{ color:{WHITE}; font-weight:700; margin-right:18px; padding-right:18px; border-right:2px solid {LINE}; }}
 .bar {{ position:absolute; left:0; top:0; width:12px; height:100%; background:{acc}; }}
 .kicker {{ display:inline-flex; gap:16px; align-items:center; font-size:26px; font-weight:700; letter-spacing:3px; color:{acc}; }}
 .kicker .tag {{ color:{MUTED}; letter-spacing:1px; }}
@@ -182,7 +184,9 @@ def top(d):
 
 
 def foot(left, i, n):
-    return f"<div class='foot'><span>{esc(left)}</span><span><b>{i}</b>&nbsp;/&nbsp;{n}</span></div>"
+    # 11/9 사용자 지시: 모든 장 하단에 계정 핸들 + 장 번호 (cn-carousel)
+    return (f"<div class='foot'><span>{esc(left)}</span><span class='pg'>"
+            f"<span class='hd'>@sport_news_desk</span><b>{i}</b>&nbsp;/&nbsp;{n}</span></div>")
 
 
 def kicker(d):
@@ -306,7 +310,7 @@ def slide(d, s, i, n):
     elif t == "closing":
         pts = "".join(f"<div>{esc(p)}</div>" for p in s.get("points", []))
         inner = (f"<div class='sum'>{esc(s['summary'])}</div><div class='pts'>{pts}</div>"
-                 f"<div class='cta'>{esc(s['cta'])}</div><div class='handle'>@sport_news_desk</div>")
+                 f"<div class='cta'>{esc(s['cta'])}</div>")  # 핸들은 하단 foot에 모든 장 공통으로 들어감
         return f"{under}<div class='bar'></div><div class='frame'>{top(d)}<div class='mid'>{inner}</div>{foot(src or '스포츠데스크 · 매일 스포츠를 맥락까지', i, n)}</div>"
     else:
         raise ValueError(t)
