@@ -210,7 +210,7 @@ def cover_bold(d, s, i, n, ph):
     tag = f"#{esc(d['tag'])}"
     inner = (f"<div class='b-top'><div class='b-brand'><i></i><div>SPORTS DESK<small>{esc(d['sport_en'])} · {esc(d['date'])}</small></div></div>"
              f"<div class='b-tag'>{tag}</div></div>"
-             f"<div class='b-mid'><div class='b-arrow'>{backgrounds.doodle_arrow()}</div>{chip}"
+             f"<div class='b-mid'>{chip}"  # 11/8 사용자 지시: 표지 화살표 없앰
              f"<div class='b-kw' style='font-size:{size}px'>{esc(kw)}</div>"
              f"<div class='b-hook'>{esc(s['hook'])}</div>"
              f"<div class='b-brush'>{backgrounds.brush(w=s.get('brush_w', 460))}</div>"
