@@ -15,10 +15,18 @@
   "publish_at": "manual (권장 2026-11-08 19:30)",
   "image_prompt": "Photorealistic sports magazine photo of a gold medal with a red ribbon lying next to a pair of military dog tags and a folded olive green army cap on a dark wooden table, dramatic spotlight lighting, dark moody background with bokeh, subject on the right side of the frame, no people, no text, no logos",
   "image": {
-    "tool": "Canva generate-image",
-    "canva_media_id": "MAHaSzZnf7Y",
-    "link": "https://www.canva.com/M/MAHaSzZnf7Y",
-    "status": "사용자가 내려받아 채팅에 올리면 표지에 넣음"
+    "tool": "Unsplash 실사 사진",
+    "unsplash_id": "u-OIymmnw1s",
+    "link": "https://unsplash.com/photos/u-OIymmnw1s",
+    "author": "George Pisarevsky",
+    "license": "Unsplash License (무료, 상업 이용 가능)",
+    "status": "표지 적용 (11/8 PC). 이전 Canva 안 MAHaSzZnf7Y는 미사용"
+  },
+  "photo": {
+    "src": "C:/Users/kmins/Desktop/AI workfile/스포츠데스크/cardnews_photos/2026-11-08/military_unsplash_u-OIymmnw1s.jpg",
+    "mode": "full",
+    "credit": "사진: G. Pisarevsky / Unsplash",
+    "focus": "center 40%"
   },
   "evidence": [
     {
